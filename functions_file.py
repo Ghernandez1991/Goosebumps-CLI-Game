@@ -7,6 +7,7 @@ from threading import Timer
 import os                                                      
 import random
 import pandas as pd
+from random_word import RandomWords
 
 
 
@@ -23,7 +24,7 @@ def time_ran_out():
     #flush after every print because otherwise the terminal does not update real time
     sys.stdout.flush()
     #open image signifiying the player died
-    img = Image.open(r'C:\Users\Gabriel Hernandez\Desktop\word_game\images\headless.png')
+    img = Image.open(r'images\headless.PNG')
     img.show()
     #exit the terminal because the game is over
     os._exit(0)
@@ -32,7 +33,7 @@ def time_ran_out():
 #into function when the game starts
 def intro():
     #play intro music
-    playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\Goosebumps_theme.mp3', False)
+    playsound(r'audio\Goosebumps_theme.mp3', False)
     #time the terminal to the music
     time.sleep(1)
     print("Welcome to Horrorland.")
@@ -80,10 +81,10 @@ def park_entrance():
     #time the terminal to the music
     time.sleep(3)
     #show image of the ticket attendant
-    img = Image.open(r'C:\Users\Gabriel Hernandez\Desktop\word_game\images\attendant.png')
+    img = Image.open(r'images\attendant.PNG')
     img.show()
     #play the attendant welcome message
-    playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\Welcome_to_horrorland.mp3')
+    playsound(r'audio\Welcome_to_horrorland.mp3')
     print('Admission is free. You"re our guest today.')
     #flush after every print because otherwise the terminal does not update real time
     sys.stdout.flush()
@@ -96,7 +97,7 @@ def park_entrance():
     entrance_selection = int(input('Enter your selection now:'))
     if entrance_selection == 1:
         #if they enter, play the enjoy message
-        playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\Enjoy_horrorland.mp3')
+        playsound(r'audio\Enjoy_horrorland.mp3')
     elif entrance_selection == 2:
         #if the dont enter, kill them
         print('You have nothing to fear, but fear itself.\n You have terminated the game\nSo we have terminated you\nGoodbye')
@@ -179,7 +180,7 @@ def guillotine_ride():
     #flush after every print because otherwise the terminal does not update real time
     sys.stdout.flush()
     #play climbing roller coaster music
-    playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\Climbing_the_coaster.mp3', False)
+    playsound(r'audio\Climbing_the_coaster.mp3', False)
     #time the terminal to the music
     time.sleep(2)
     print("The cart starts to move.")
@@ -217,10 +218,10 @@ def guillotine_ride():
     sys.stdout.flush()
 
     #show image at the top of the roller coaster
-    img = Image.open(r'C:\Users\Gabriel Hernandez\Desktop\word_game\images\top_of_the_coaster.png')
+    img = Image.open(r'images\top_of_the_coaster.PNG')
     img.show()
     #play audio for the ride down
-    playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\Descent_from_top.mp3')
+    playsound(r'audio\Descent_from_top.mp3')
     #based on user seat selection, their reaction time will be shorter at the front of the ride, longer at the rear.
     if seat_selection == 1:
         time_to_react = 3
@@ -286,6 +287,7 @@ def leave_park():
 
 #create a main menu where the user can choose which ride(function) they want to play
 def park_map():
+    playsound(r'audio\Goosebumps (Theme Song).mp3', False)
     print('Unclear of where to go next, you lookaround for a map.')
     sys.stdout.flush()
     #time the terminal 
@@ -329,7 +331,7 @@ def park_map():
 
 def house_of_mirrors():
     
-    playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\House_of_mirrors.mp3')
+    playsound(r'audio\House_of_mirrors.mp3')
     print("You enter the house of mirrors")
     sys.stdout.flush()
     time.sleep(3)
@@ -353,7 +355,7 @@ def house_of_mirrors():
             
     left_choices = ['left','Left','LEFT','L','l']
     right_choices = ['right','Right','RIGHT','R', 'r']
-    img = Image.open(r'C:\Users\Gabriel Hernandez\Desktop\word_game\images\in_the_hall_of_mirrors.png')
+    img = Image.open(r'images\in_the_hall_of_mirrors.PNG')
     img.show()
     time.sleep(5)
     print('You find yourself in a hall of mirrors.')
@@ -371,11 +373,11 @@ def house_of_mirrors():
         print('The room is dark')
         sys.stdout.flush()
         time.sleep(5)
-        playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\Where_are_you.mp3')
+        playsound(r'audio\Where_are_you.mp3')
         print('You find yourself trapped in\n The room is dark. \n No one can hear your screams')
         sys.stdout.flush()
         time.sleep(5)
-        img = Image.open(r'C:\Users\Gabriel Hernandez\Desktop\word_game\images\demon.png')
+        img = Image.open(r'images\demon.PNG')
         img.show()
         print("You must make your selections carefully, or else you will trapped forever.")
      
@@ -394,32 +396,6 @@ def house_of_mirrors():
         #probably an if statment- 
         
 
-
-
-
-
-
-
-
-
-
-
-
-
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
      
         sys.stdout.flush()
     elif direction_choice in right_choices:
@@ -438,39 +414,11 @@ def house_of_mirrors():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def house_of_mirrors_gameboard():
     #set the number of strikes(mistakes) the user is allowed to 0. So we can count them
-    strikes = 0
+    #strikes = 0
     #user gets a random number of chances between 3 and 5
-    chances = random.randrange(3,5)
+    #chances = random.randrange(3,5)
     #list of rows-indexing starts at 0
     rows = [0,1,2,3]
     #list of columns 
@@ -484,32 +432,52 @@ def house_of_mirrors_gameboard():
         #we want the starting y position to be a value in list [columns ]
         starting_x_axis = random.choice(columns)
         #concatonate together, convert into to str
+        global starting_position
         starting_position = starting_x_axis + str(starting_y_axis)
-         #create random exit position
+        #create random exit position
         #we want to users starting y position to be between 0 and 3
         exit_y_axis = random.randrange(0,4)
         #we want the starting y position to be a value in list [columns ]
         exit_x_axis = random.choice(columns)
         #concatonate together, convert into to str
+        global exit_position
         exit_position = exit_x_axis + str(exit_y_axis)
 
 
         #todo
         #create death traps as well
         #want these to be random. 
+        punjee_pit_starting_position_yaxis = random.randrange(0,4)
+        punjee_pit_starting_position_xaxis = random.choice(columns)
+        
+        global punjee_pit_starting_position
+        punjee_pit_starting_position = punjee_pit_starting_position_xaxis + str(punjee_pit_starting_position_yaxis)
+       
+        
+        
+        
+        
+        
+        
+        
+        
 
 
         if starting_position==exit_position:
+            pass
+        elif starting_position == punjee_pit_starting_position:
+            pass
+        elif exit_position==punjee_pit_starting_position:
             pass
         else:
             break
 
     #print how lucky the user is.
-    print(f"You get {chances} chances to make it out alive")
+    #print(f"You get {chances} chances to make it out alive")
     print('in the darkness, youre not sure where to do.')
     print(f"Your starting position is {starting_position}")
     print(f"your exit position is {exit_position}")
-
+    print(f"your punjee pit position is {punjee_pit_starting_position}")
 
     #need to write these values to the dataframe--seee excel sheet. 
     #exit, entrance , puzzle or boobie trap all written to dataframe.
@@ -533,11 +501,25 @@ def house_of_mirrors_gameboard():
     print(f"The exit row index is {indexed_exit_y_point}, the exit column index is{indexed_exit_x_point}")
     df.iat[indexed_exit_y_point, indexed_exit_x_point] = 'exit_point'
 
+    #print(df)
+    
+    #put punjee pit to dataframe
+    
+    converted_punjee_x_point = punjee_pit_starting_position[0]
+    converted_punjee_y_point = int(punjee_pit_starting_position[1])
+    indexed__punjee_start_x_point = columns.index(converted_punjee_x_point)
+    indexed_punjee_start_y_point = rows.index(converted_punjee_y_point)
+    print(f"The start row index for punjee is {indexed_punjee_start_y_point}, the start column index for punjee is{indexed__punjee_start_x_point}")
+    df.iat[indexed_punjee_start_y_point, indexed__punjee_start_x_point] = 'punjee_pit'
     print(df)
+    
+    
+    
+    
     df.to_csv('current_game_board.csv')
 
 #call function for testing
-#house_of_mirrors_gameboard()
+house_of_mirrors_gameboard()
 
 
 #function to pass starting position to- it finds its position (row and column) in the list which makes up the checkerboard
@@ -570,12 +552,13 @@ def move_function(starting_position):
         
 
     return value_of_column, value_of_row
-
-#move_function('b3')
+#uncomment to test
+move_function('d0')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
     try:
+        
         #get list of rows in the house of mirrors 
         rows = [0,1,2,3]
         #get list of column names from house of mirrors 
@@ -593,7 +576,9 @@ def forward_function(value_of_column,value_of_row):
 
 
 #put in index values from the move_function
-#forward_function(1,3)
+forward_function(3,0)
+
+
 #put in index values from the move_function
 def backward_function(value_of_column,value_of_row):
     try:
@@ -660,16 +645,87 @@ def punjee_pit():
     print('The room is pitch black')
     print('You cant hear a thing')
     print('You slip and fall')
-    playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\Falling.mp3')
-    playsound(r'C:\Users\Gabriel Hernandez\Desktop\word_game\audio\Fatality.mp3')
+    playsound(r'audio\Falling.mp3')
+    playsound(r'audio\Fatality.mp3')
 
 #punjee_pit()
 
+def breakout_room():
+    r= RandomWords()
+    
+    #user gets a random number of chances between 3 and 5
+    strikes = random.randrange(3,5)
+    print(strikes)
+    screw_ups = 0
+    correct_guesses = 0
+    
+    
+    print('The room is pitch')
+    print('You cant see a thing')
+    player_input = input('Who goes there?')
+    print(f'Well {player_input}, you have to correctly respond to my commands, or you will trapped for ever. You have {strikes} strikes until the doors lock forever')
+    print('Any typos move the clock closer to 12')
+    print('Good luck')
+    list_of_words = r.get_random_words(limit=5)
+    print(len(list_of_words))
+    time_to_react = random.randrange(45,60)
+    
+    t =Timer(time_to_react,time_ran_out)
+    #start timer
+    t.start()
+    #prompt the user for input and quick    
+    
+    for item in list_of_words:        
+        print(f'Type {item}')
+        user_input = input('Quick!\n Type the word above\n Press Enter')
+        #if the user managed to press a button
+        if user_input==item :
+        
+            print ('You managed to type the word correctly')
+            
+            #flush after every print because otherwise the terminal does not update real time
+            #sys.stdout.flush()
+            #cancel the timer function and get out
+            #t.cancel()
+            #if the user failed to input anything    
+            correct_guesses += 1
+        elif user_input != item :
+            print('You screwed up')
+            #call time_ran_out_function which kills the player and the game
+            screw_ups += 1 
+            #time_ran_out()
+            if screw_ups == strikes:
+                time_ran_out()
+                
+        elif  correct_guesses == len(list_of_words):
+            print('You successfully printed all the words')
+            player_direction  = int(input('Which direction do you want to go 1:Forward 2:Backrward 3:Left 4:Right'))
+            if player_direction == 1:
+                forward_function()
+            elif player_direction == 2:
+                backward_function()
+            elif player_direction == 3:
+                left_function()
+            elif player_direction == 4:
+                right_function()
+            else:
+                print('Invalid selection')
+        
+        else:
+            print('You managed to crack your skull on a passing branch.\n Have fun falling unconcious and not waking up.\n Goodbye')
+            #flush after every print because otherwise the terminal does not update real time
+            sys.stdout.flush()
+            sys.exit('User hit their head')
 
+    
+    
+#test function    
+breakout_room ()
+    
+function_dictionary = {'7': time_ran_out, '8': intro, '9': park_entrance,
+                       '10': breakout_room,
+                       '6': leave_park, '1': guillotine_ride,
+                       '2': petting_zoo, '3': shooting_gallery,
+                       '4': park_map, '5': house_of_mirrors}
+#function_dictionary = {'7' : time_ran_out, '8' : intro ,'9' : park_entrance ,'6' : leave_park ,'1': guillotine_ride, '2': petting_zoo, '3' :shooting_gallery, '4': park_map, '5':house_of_mirrors }
 
-
-
-
-
-#create a master dictionary of all functions in the program. 
-function_dictionary = {'7':time_ran_out, '8':intro ,'9': park_entrance ,'6': leave_park ,'1': guillotine_ride, '2': petting_zoo, '3' :shooting_gallery, '4': park_map, '5':house_of_mirrors }
