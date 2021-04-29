@@ -8,13 +8,7 @@ import os
 import random
 import pandas as pd
 from random_word import RandomWords
-
-
-
-
-
-
-
+import numpy as np
 
 
 #helper function for using timer
@@ -29,7 +23,6 @@ def time_ran_out():
     #exit the terminal because the game is over
     os._exit(0)
     
-   
 #into function when the game starts
 def intro():
     #play intro music
@@ -112,36 +105,6 @@ def park_entrance():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #first ride. 
 def guillotine_ride():
     print('After gathering your tickets, you see a large sign.')
@@ -155,14 +118,14 @@ def guillotine_ride():
     #time the terminal to the music
     time.sleep(1)
     print('You"ll never forget')
-     #flush after every print because otherwise the terminal does not update real time
+    #flush after every print because otherwise the terminal does not update real time
     sys.stdout.flush()
-     #time the terminal to the music
+    #time the terminal to the music
     time.sleep(1)
     print('Welcome to Death Mountain')
-     #flush after every print because otherwise the terminal does not update real time
+    #flush after every print because otherwise the terminal does not update real time
     sys.stdout.flush()
-     #time the terminal to the music
+    #time the terminal to the music
     time.sleep(1)
     print('Guranteed to be a slicing good time')
     #flush after every print because otherwise the terminal does not update real time
@@ -232,10 +195,7 @@ def guillotine_ride():
     else:
         #catch all other entries
         print('You did not secure yourself to the ride.\n Have fun falling to your death. \n Goodbye')
-        
         sys.exit('User fell out of the ride')
-
-    
     #call timer fuction, arguements are the users time_to_react(based on seat selection) and the time_ran_out function
     #the timer runs for anywhere from 3-5 seconds, and then calls the time_ran_out function of the user doesnt press a button
     t =Timer(time_to_react,time_ran_out)
@@ -245,7 +205,6 @@ def guillotine_ride():
     user_input = input('Quick!\n Press any key.\n Better duck quick!\n Press Enter')
     #if the user managed to press a button
     if user_input!=None :
-        
         print ('You managed to save your head by ducking')
         #flush after every print because otherwise the terminal does not update real time
         sys.stdout.flush()
@@ -254,17 +213,13 @@ def guillotine_ride():
     #if the user failed to input anything    
     elif user_input ==None :
         #call time_ran_out_function which kills the player and the game
-   
         time_ran_out()
-        
     else:
         print('You managed to crack your skull on a passing branch.\n Have fun falling unconcious and not waking up.\n Goodbye')
         #flush after every print because otherwise the terminal does not update real time
         sys.stdout.flush()
         sys.exit('User hit their head')
-
     park_map()
-
 
 
 #create functions for remaining parts of the story
@@ -272,14 +227,9 @@ def petting_zoo():
     print('petting zoo')
 
 
-
-
-
-
 #create functions for remaining parts of the story
 def shooting_gallery():
     print('shooting gallery')
-
 
 
 def leave_park():
@@ -298,10 +248,7 @@ def park_map():
     map_dic = {1: 'guillotine_ride', 2: 'petting_zoo', 3 :'shooting_gallery', 4: 'park_map', 5:'house_of_mirrors', 6:'leave_park'}
     #print the dictionary so the user knows what to look for 
     print(map_dic)
-    
-   
-    
-   #wrap in a while statement because we need a true valid response before we can move to the next function 
+    #wrap in a while statement because we need a true valid response before we can move to the next function 
     while True:
         #grab user input as a string
     
@@ -453,17 +400,7 @@ def house_of_mirrors_gameboard():
         
         global punjee_pit_starting_position
         punjee_pit_starting_position = punjee_pit_starting_position_xaxis + str(punjee_pit_starting_position_yaxis)
-       
         
-        
-        
-        
-        
-        
-        
-        
-
-
         if starting_position==exit_position:
             pass
         elif starting_position == punjee_pit_starting_position:
@@ -480,43 +417,46 @@ def house_of_mirrors_gameboard():
     print(f"your exit position is {exit_position}")
     print(f"your punjee pit position is {punjee_pit_starting_position}")
 
-    #need to write these values to the dataframe--seee excel sheet. 
-    #exit, entrance , puzzle or boobie trap all written to dataframe.
-    #we can logically check the value of each cell, and call a function based on its value
-    #must be integer based however
-    # df.iat[1, 2] = 10
+    #grab the first value of the starting_position(column). The value is originally a string, so we have to conver the second value to int
     converted_start_x_point = starting_position[0]
+    #grab the second value of the starting_position(row). The value is originally a string, so we have to conver the second value to int
     converted_start_y_point = int(starting_position[1])
+    #use index function to find which index poisition the starting row/column is in the lists of rows and columns
     indexed_start_x_point = columns.index(converted_start_x_point)
+    #use index function to find which index poisition the starting row/column is in the lists of rows and columns
     indexed_start_y_point = rows.index(converted_start_y_point)
     print(f"The start row index is {indexed_start_y_point}, the start column index is{indexed_start_x_point}")
-
+    #using the row and column index values, place 'starting_point' onto our game board(csv file)
     df.iat[indexed_start_y_point, indexed_start_x_point] = 'starting_point'
 
 
-
+    #grab the first value of the exit_position(column). The value is originally a string, so we have to convert the second value to int
     converted_exit_x_point = exit_position[0]
+    #grab the second value of the exit_position(row). The value is originally a string, so we have to convert the second value to int
     converted_exit_y_point = int(exit_position[1])
+    #use index function to find which index poisition the starting row/column is in the lists of rows and columns
     indexed_exit_x_point = columns.index(converted_exit_x_point)
+    #use index function to find which index poisition the starting row/column is in the lists of rows and columns
     indexed_exit_y_point = rows.index(converted_exit_y_point)
     print(f"The exit row index is {indexed_exit_y_point}, the exit column index is{indexed_exit_x_point}")
+    #using the row and column index values, place 'exit_point' onto our game board(csv file)
     df.iat[indexed_exit_y_point, indexed_exit_x_point] = 'exit_point'
 
-    #print(df)
-    
     #put punjee pit to dataframe
-    
+    #grab the first value of the punjee_pit(column). The value is originally a string, so we have to convert the second value to int
     converted_punjee_x_point = punjee_pit_starting_position[0]
+    #grab the second value of the punjee_pit(row). The value is originally a string, so we have to convert the second value to int
     converted_punjee_y_point = int(punjee_pit_starting_position[1])
+    #use index function to find which index poisition the starting row/column is in the lists of rows and columns
     indexed__punjee_start_x_point = columns.index(converted_punjee_x_point)
+    #use index function to find which index poisition the starting row/column is in the lists of rows and columns
     indexed_punjee_start_y_point = rows.index(converted_punjee_y_point)
     print(f"The start row index for punjee is {indexed_punjee_start_y_point}, the start column index for punjee is{indexed__punjee_start_x_point}")
+    #using the row and column index values, place 'exit_point' onto our game board(csv file)
     df.iat[indexed_punjee_start_y_point, indexed__punjee_start_x_point] = 'punjee_pit'
+    #print DF so we can see all the items on the board
     print(df)
-    
-    
-    
-    
+    #write the df to a csv for use later
     df.to_csv('current_game_board.csv')
 
 #call function for testing
@@ -554,45 +494,57 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-move_function('c1')
+move_function('d3')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
+    #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
     try:
+        #check all the rows and columns in the dataframe and look for the string 'current_position' . If found, it returns an array
+        current_position_count = np.column_stack([df[col].str.contains("current_position", na=False) for col in df])
+        #if the value is found in the array, the value is greater than 1
+        if current_position_count.any()>0:
+            #if so, we want to find the previous 'current_position' and overwrite it with a nan
+            df[df.eq('current_position')] = np.nan
         
-        #get list of rows in the house of mirrors 
-        rows = [0,1,2,3]
-        #get list of column names from house of mirrors 
-        columns = ['a', 'b', 'c', 'd']
-        #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
-        new_forward_row_position = rows[value_of_row - 1]
-        #calculate new forward column position by taking the index value from value of column 
-        new_forward_column_position = columns[value_of_column]
-        print(new_forward_column_position,new_forward_row_position)
-        
-        #print current position in gameboard
-        #convert column from string(abcd) to the index value in list
-        new_forward_column_position = columns.index(new_forward_column_position)
-        #take the index value and place 'current position' in the spreadsheet
-        df.iat[new_forward_row_position,new_forward_column_position] = 'current_position'
-        print(f"the new forward row position is {new_forward_row_position}, the new_forward_column_position is {new_forward_column_position}  ")
-        print(df)       
-        
+            
+            #get list of rows in the house of mirrors 
+            rows = [0,1,2,3]
+            #get list of column names from house of mirrors 
+            columns = ['a', 'b', 'c', 'd']
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            new_forward_row_position = rows[value_of_row - 1]
+            #calculate new forward column position by taking the index value from value of column 
+            new_forward_column_position = columns[value_of_column]
+            print(new_forward_column_position,new_forward_row_position)
+            
+            #print current position in gameboard
+            #convert column from string(abcd) to the index value in list
+            new_forward_column_position = columns.index(new_forward_column_position)
+            #take the index value and place 'current position' in the spreadsheet
+            df.iat[new_forward_row_position,new_forward_column_position] = 'current_position'
+            print(f"the new forward row position is {new_forward_row_position}, the new_forward_column_position is {new_forward_column_position}  ")
+            print(df)       
     except IndexError:
         print('catching the index error')
         print('user hit the wall, cant turn right. Make a new selection')
-           #dictionary of functions for front or back or left. 
-
     return new_forward_column_position, new_forward_row_position
 
 
 #put in index values from the move_function
-forward_function(1,1)
+forward_function(2,0)
 
 
 #put in index values from the move_function
 def backward_function(value_of_column,value_of_row):
+    #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
     try:
+        #check all the rows and columns in the dataframe and look for the string 'current_position' . If found, it returns an array
+        current_position_count = np.column_stack([df[col].str.contains("current_position", na=False) for col in df])
+        #if the value is found in the array, the value is greater than 1
+        if current_position_count.any()>0:
+            #if so, we want to find the previous 'current_position' and overwrite it with a nan
+            df[df.eq('current_position')] = np.nan
         #get list of rows in the house of mirrors 
         rows = [0,1,2,3]
         #get list of column names from house of mirrors 
@@ -614,17 +566,21 @@ def backward_function(value_of_column,value_of_row):
     except IndexError:
         print('catching the index error')
         print('user hit the wall, cant turn right. Make a new selection')
-           #dictionary of functions for front or back or left. 
     return new_backward_column_position, new_backward_row_position
 
 
 #put in index values from the move_function
-backward_function(0,0)
-
-
+backward_function(0,3)
 
 def left_function(value_of_column,value_of_row):
+    #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
     try:
+        #check all the rows and columns in the dataframe and look for the string 'current_position' . If found, it returns an array
+        current_position_count = np.column_stack([df[col].str.contains("current_position", na=False) for col in df])
+        #if the value is found in the array, the value is greater than 1
+        if current_position_count.any()>0:
+            #if so, we want to find the previous 'current_position' and overwrite it with a nan            
+            df[df.eq('current_position')] = np.nan
         #get list of rows in the house of mirrors 
         rows = [0,1,2,3]
         #get list of column names from house of mirrors 
@@ -644,21 +600,23 @@ def left_function(value_of_column,value_of_row):
         print(f"the new left row position is {new_left_row_position}, the new_left_column_position is {new_left_column_position}  ")
         print(df)  
         
-        
-        
-        
     except IndexError:
         print('catching the index error')
         print('user hit the wall, cant turn right. Make a new selection')
-           #dictionary of functions for front or back or left. 
-
     return new_left_column_position, new_left_row_position
 
-left_function(0,2)   
+left_function(3,3)   
 
 
 def right_function(value_of_column,value_of_row):
+    #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
     try:
+        #check all the rows and columns in the dataframe and look for the string 'current_position' . If found, it returns an array
+        current_position_count = np.column_stack([df[col].str.contains("current_position", na=False) for col in df])
+        #if the value is found in the array, the value is greater than 1
+        if current_position_count.any()>0:
+            #if so, we want to find the previous 'current_position' and overwrite it with a nan  
+            df[df.eq('current_position')] = np.nan
         #get list of rows in the house of mirrors 
         rows = [0,1,2,3]
         #get list of column names from house of mirrors 
@@ -682,11 +640,10 @@ def right_function(value_of_column,value_of_row):
     except IndexError:
         print('catching the index error')
         print('user hit the wall, cant turn right. Make a new selection')
-           #dictionary of functions for front or back or left. 
     return new_right_column_position, new_right_row_position
 
 
-right_function(2,1)
+right_function(2,0)
 
 
 def punjee_pit():
@@ -747,17 +704,7 @@ def breakout_room():
                 
         elif  correct_guesses == len(list_of_words):
             print('You successfully printed all the words')
-            player_direction  = int(input('Which direction do you want to go 1:Forward 2:Backrward 3:Left 4:Right'))
-            if player_direction == 1:
-                forward_function()
-            elif player_direction == 2:
-                backward_function()
-            elif player_direction == 3:
-                left_function()
-            elif player_direction == 4:
-                right_function()
-            else:
-                print('Invalid selection')
+            player_movement_choice()
         
         else:
             print('You managed to crack your skull on a passing branch.\n Have fun falling unconcious and not waking up.\n Goodbye')
@@ -765,11 +712,25 @@ def breakout_room():
             sys.stdout.flush()
             sys.exit('User hit their head')
 
-    
-    
 #test function    
 breakout_room ()
+
+#create function that accounts for player movement choice. Prompt the user to pick a direction. Everytime they chose, it calls the function to move the respective direction.     
+def player_movement_choice():
+    player_direction  = int(input('Which direction do you want to go 1:Forward 2:Backrward 3:Left 4:Right'))
+    if player_direction == 1:
+        forward_function()
+    elif player_direction == 2:
+        backward_function()
+    elif player_direction == 3:
+        left_function()
+    elif player_direction == 4:
+        right_function()
+    else:
+        print('Invalid selection')
     
+
+
 function_dictionary = {'7': time_ran_out, '8': intro, '9': park_entrance,
                        '10': breakout_room,
                        '6': leave_park, '1': guillotine_ride,
@@ -777,3 +738,4 @@ function_dictionary = {'7': time_ran_out, '8': intro, '9': park_entrance,
                        '4': park_map, '5': house_of_mirrors}
 #function_dictionary = {'7' : time_ran_out, '8' : intro ,'9' : park_entrance ,'6' : leave_park ,'1': guillotine_ride, '2': petting_zoo, '3' :shooting_gallery, '4': park_map, '5':house_of_mirrors }
 
+ 

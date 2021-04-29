@@ -1,5 +1,5 @@
 ,a,b,c,d
 0,,,,
-1,,,starting_point,
-2,punjee_pit,,,exit_point
-3,,,,
+1,,,,punjee_pit
+2,,exit_point,,
+3,,,,starting_point
