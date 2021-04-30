@@ -494,7 +494,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-move_function('b2')
+move_function('c0')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -502,6 +502,8 @@ def forward_function(value_of_column,value_of_row):
     try:
         #check all the rows and columns in the dataframe and look for the string 'current_position' . If found, it returns an array
         current_position_count = np.column_stack([df[col].str.contains("current_position", na=False) for col in df])
+        global new_forward_row_position
+        global new_forward_column_position
         #if the value is found in the array, the value is greater than 1
         if current_position_count.any()>0:
             #if so, we want to find the previous 'current_position' and overwrite it with a nan
@@ -511,6 +513,7 @@ def forward_function(value_of_column,value_of_row):
             #get list of column names from house of mirrors 
             columns = ['a', 'b', 'c', 'd']
             #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            
             new_forward_row_position = rows[value_of_row - 1]
             #calculate new forward column position by taking the index value from value of column 
             new_forward_column_position = columns[value_of_column]
@@ -528,7 +531,7 @@ def forward_function(value_of_column,value_of_row):
             rows = [0,1,2,3]
             #get list of column names from house of mirrors 
             columns = ['a', 'b', 'c', 'd']
-            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix            
             new_forward_row_position = rows[value_of_row - 1]
             #calculate new forward column position by taking the index value from value of column 
             new_forward_column_position = columns[value_of_column]
@@ -548,13 +551,16 @@ def forward_function(value_of_column,value_of_row):
 
 
 #put in index values from the move_function
-forward_function(0,2)
+forward_function(2,0)
 
 
 #put in index values from the move_function
 def backward_function(value_of_column,value_of_row):
     #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
     try:
+        
+        global new_backward_row_position
+        global new_backward_column_position
         #check all the rows and columns in the dataframe and look for the string 'current_position' . If found, it returns an array
         current_position_count = np.column_stack([df[col].str.contains("current_position", na=False) for col in df])
         #if the value is found in the array, the value is greater than 1
@@ -566,8 +572,10 @@ def backward_function(value_of_column,value_of_row):
             #get list of column names from house of mirrors 
             columns = ['a', 'b', 'c', 'd']
             #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            
             new_backward_row_position = rows[value_of_row + 1]
             #calculate new forward column position by taking the index value from value of column 
+            
             new_backward_column_position = columns[value_of_column]
         
             print(new_backward_column_position,new_backward_row_position)
@@ -611,6 +619,8 @@ backward_function(2,3)
 def left_function(value_of_column,value_of_row):
     #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
     try:
+        global new_left_row_position
+        global new_left_column_position
         #check all the rows and columns in the dataframe and look for the string 'current_position' . If found, it returns an array
         current_position_count = np.column_stack([df[col].str.contains("current_position", na=False) for col in df])
         #if the value is found in the array, the value is greater than 1
@@ -622,8 +632,10 @@ def left_function(value_of_column,value_of_row):
             #get list of column names from house of mirrors 
             columns = ['a', 'b', 'c', 'd']
             #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+           
             new_left_column_position = columns[value_of_column - 1]
             #calculate new forward column position by taking the index value from value of column 
+            
             new_left_row_position = rows[value_of_row]
         
             print(new_left_column_position,new_left_row_position)
@@ -662,12 +674,14 @@ def left_function(value_of_column,value_of_row):
         print('user hit the wall, cant turn right. Make a new selection')
     return new_left_column_position, new_left_row_position
 
-left_function(1,1)   
+left_function(1,2)   
 
 
 def right_function(value_of_column,value_of_row):
     #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
     try:
+        global new_right_row_position
+        global new_right_column_position
         #check all the rows and columns in the dataframe and look for the string 'current_position' . If found, it returns an array
         current_position_count = np.column_stack([df[col].str.contains("current_position", na=False) for col in df])
         #if the value is found in the array, the value is greater than 1
