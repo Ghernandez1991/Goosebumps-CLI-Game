@@ -494,7 +494,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-move_function('d3')
+move_function('b2')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -506,8 +506,24 @@ def forward_function(value_of_column,value_of_row):
         if current_position_count.any()>0:
             #if so, we want to find the previous 'current_position' and overwrite it with a nan
             df[df.eq('current_position')] = np.nan
-        
+            #get list of rows in the house of mirrors 
+            rows = [0,1,2,3]
+            #get list of column names from house of mirrors 
+            columns = ['a', 'b', 'c', 'd']
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            new_forward_row_position = rows[value_of_row - 1]
+            #calculate new forward column position by taking the index value from value of column 
+            new_forward_column_position = columns[value_of_column]
+            print(new_forward_column_position,new_forward_row_position)
             
+            #print current position in gameboard
+            #convert column from string(abcd) to the index value in list
+            new_forward_column_position = columns.index(new_forward_column_position)
+            #take the index value and place 'current position' in the spreadsheet
+            df.iat[new_forward_row_position,new_forward_column_position] = 'current_position'
+            print(f"the new forward row position is {new_forward_row_position}, the new_forward_column_position is {new_forward_column_position}  ")
+            print(df)                      
+        elif current_position_count.any()==0:
             #get list of rows in the house of mirrors 
             rows = [0,1,2,3]
             #get list of column names from house of mirrors 
@@ -532,7 +548,7 @@ def forward_function(value_of_column,value_of_row):
 
 
 #put in index values from the move_function
-forward_function(2,0)
+forward_function(0,2)
 
 
 #put in index values from the move_function
@@ -545,24 +561,44 @@ def backward_function(value_of_column,value_of_row):
         if current_position_count.any()>0:
             #if so, we want to find the previous 'current_position' and overwrite it with a nan
             df[df.eq('current_position')] = np.nan
-        #get list of rows in the house of mirrors 
-        rows = [0,1,2,3]
-        #get list of column names from house of mirrors 
-        columns = ['a', 'b', 'c', 'd']
-        #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
-        new_backward_row_position = rows[value_of_row + 1]
-        #calculate new forward column position by taking the index value from value of column 
-        new_backward_column_position = columns[value_of_column]
+            #get list of rows in the house of mirrors 
+            rows = [0,1,2,3]
+            #get list of column names from house of mirrors 
+            columns = ['a', 'b', 'c', 'd']
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            new_backward_row_position = rows[value_of_row + 1]
+            #calculate new forward column position by taking the index value from value of column 
+            new_backward_column_position = columns[value_of_column]
         
-        print(new_backward_column_position,new_backward_row_position)
+            print(new_backward_column_position,new_backward_row_position)
         
-        #print current position in gameboard
-        #convert column from string(abcd) to the index value in list
-        new_backward_column_position = columns.index(new_backward_column_position)
-        #take the index value and place 'current position' in the spreadsheet
-        df.iat[new_backward_row_position,new_backward_column_position] = 'current_position'
-        print(f"the new backward row position is {new_backward_row_position}, the new_backward_column_position is {new_backward_column_position}  ")
-        print(df)      
+            #print current position in gameboard
+            #convert column from string(abcd) to the index value in list
+            new_backward_column_position = columns.index(new_backward_column_position)
+            #take the index value and place 'current position' in the spreadsheet
+            df.iat[new_backward_row_position,new_backward_column_position] = 'current_position'
+            print(f"the new backward row position is {new_backward_row_position}, the new_backward_column_position is {new_backward_column_position}  ")
+            print(df)    
+        
+        elif current_position_count.any()==0:
+            #get list of rows in the house of mirrors 
+            rows = [0,1,2,3]
+            #get list of column names from house of mirrors 
+            columns = ['a', 'b', 'c', 'd']
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            new_backward_row_position = rows[value_of_row + 1]
+            #calculate new forward column position by taking the index value from value of column 
+            new_backward_column_position = columns[value_of_column]
+            print(new_backward_column_position,new_backward_row_position)
+            
+            #print current position in gameboard
+            #convert column from string(abcd) to the index value in list
+            new_backward_column_position = columns.index(new_backward_column_position)
+            #take the index value and place 'current position' in the spreadsheet
+            df.iat[new_backward_row_position,new_backward_column_position] = 'current_position'
+            print(f"the new forward row position is {new_backward_row_position}, the new_forward_column_position is {new_backward_column_position}  ")
+            print(df) 
+        
     except IndexError:
         print('catching the index error')
         print('user hit the wall, cant turn right. Make a new selection')
@@ -570,7 +606,7 @@ def backward_function(value_of_column,value_of_row):
 
 
 #put in index values from the move_function
-backward_function(0,3)
+backward_function(2,3)
 
 def left_function(value_of_column,value_of_row):
     #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
@@ -582,30 +618,51 @@ def left_function(value_of_column,value_of_row):
             #if so, we want to find the previous 'current_position' and overwrite it with a nan            
             df[df.eq('current_position')] = np.nan
         #get list of rows in the house of mirrors 
-        rows = [0,1,2,3]
-        #get list of column names from house of mirrors 
-        columns = ['a', 'b', 'c', 'd']
-        #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
-        new_left_column_position = columns[value_of_column - 1]
-        #calculate new forward column position by taking the index value from value of column 
-        new_left_row_position = rows[value_of_row]
+            rows = [0,1,2,3]
+            #get list of column names from house of mirrors 
+            columns = ['a', 'b', 'c', 'd']
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            new_left_column_position = columns[value_of_column - 1]
+            #calculate new forward column position by taking the index value from value of column 
+            new_left_row_position = rows[value_of_row]
         
-        print(new_left_column_position,new_left_row_position)
+            print(new_left_column_position,new_left_row_position)
         
-        #print current position in gameboard
-        #convert column from string(abcd) to the index value in list
-        new_left_column_position = columns.index(new_left_column_position)
-        #take the index value and place 'current position' in the spreadsheet
-        df.iat[new_left_row_position,new_left_column_position] = 'current_position'
-        print(f"the new left row position is {new_left_row_position}, the new_left_column_position is {new_left_column_position}  ")
-        print(df)  
+            #print current position in gameboard
+            #convert column from string(abcd) to the index value in list
+            new_left_column_position = columns.index(new_left_column_position)
+            #take the index value and place 'current position' in the spreadsheet
+            df.iat[new_left_row_position,new_left_column_position] = 'current_position'
+            print(f"the new left row position is {new_left_row_position}, the new_left_column_position is {new_left_column_position}  ")
+            print(df)  
+        
+        
+        
+        elif current_position_count.any()==0:
+            rows = [0,1,2,3]
+            #get list of column names from house of mirrors 
+            columns = ['a', 'b', 'c', 'd']
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            new_left_column_position = columns[value_of_column - 1]
+            #calculate new forward column position by taking the index value from value of column 
+            new_left_row_position = rows[value_of_row]
+        
+            print(new_left_column_position,new_left_row_position)
+        
+            #print current position in gameboard
+            #convert column from string(abcd) to the index value in list
+            new_left_column_position = columns.index(new_left_column_position)
+            #take the index value and place 'current position' in the spreadsheet
+            df.iat[new_left_row_position,new_left_column_position] = 'current_position'
+            print(f"the new left row position is {new_left_row_position}, the new_left_column_position is {new_left_column_position}  ")
+            print(df)  
         
     except IndexError:
         print('catching the index error')
         print('user hit the wall, cant turn right. Make a new selection')
     return new_left_column_position, new_left_row_position
 
-left_function(3,3)   
+left_function(1,1)   
 
 
 def right_function(value_of_column,value_of_row):
@@ -617,24 +674,45 @@ def right_function(value_of_column,value_of_row):
         if current_position_count.any()>0:
             #if so, we want to find the previous 'current_position' and overwrite it with a nan  
             df[df.eq('current_position')] = np.nan
-        #get list of rows in the house of mirrors 
-        rows = [0,1,2,3]
-        #get list of column names from house of mirrors 
-        columns = ['a', 'b', 'c', 'd']
-        #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
-        new_right_column_position = columns[value_of_column + 1]
-        #calculate new forward column position by taking the index value from value of column 
-        new_right_row_position = rows[value_of_row]
+            #get list of rows in the house of mirrors 
+            rows = [0,1,2,3]
+            #get list of column names from house of mirrors 
+            columns = ['a', 'b', 'c', 'd']
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            new_right_column_position = columns[value_of_column + 1]
+            #calculate new forward column position by taking the index value from value of column 
+            new_right_row_position = rows[value_of_row]
         
-        print(new_right_column_position,new_right_row_position)
+            print(new_right_column_position,new_right_row_position)
         
-        #print current position in gameboard
-        #convert column from string(abcd) to the index value in list
-        new_right_column_position = columns.index(new_right_column_position)
-        #take the index value and place 'current position' in the spreadsheet
-        df.iat[new_right_row_position,new_right_column_position] = 'current_position'
-        print(f"the new right row position is {new_right_row_position}, the new_right_column_position is {new_right_column_position}  ")
-        print(df)  
+            #print current position in gameboard
+            #convert column from string(abcd) to the index value in list
+            new_right_column_position = columns.index(new_right_column_position)
+            #take the index value and place 'current position' in the spreadsheet
+            df.iat[new_right_row_position,new_right_column_position] = 'current_position'
+            print(f"the new right row position is {new_right_row_position}, the new_right_column_position is {new_right_column_position}  ")
+            print(df) 
+            
+            
+        elif current_position_count.any()==0:    
+            #get list of rows in the house of mirrors 
+            rows = [0,1,2,3]
+            #get list of column names from house of mirrors 
+            columns = ['a', 'b', 'c', 'd']
+            #calculate new forward row position by grabing existing value from the list(row) - 1.  - 1 because we are moving up(forward) in the matrix
+            new_right_column_position = columns[value_of_column + 1]
+            #calculate new forward column position by taking the index value from value of column 
+            new_right_row_position = rows[value_of_row]
+        
+            print(new_right_column_position,new_right_row_position)
+        
+            #print current position in gameboard
+            #convert column from string(abcd) to the index value in list
+            new_right_column_position = columns.index(new_right_column_position)
+            #take the index value and place 'current position' in the spreadsheet
+            df.iat[new_right_row_position,new_right_column_position] = 'current_position'
+            print(f"the new right row position is {new_right_row_position}, the new_right_column_position is {new_right_column_position}  ")
+            print(df)  
         
         
     except IndexError:
@@ -643,7 +721,7 @@ def right_function(value_of_column,value_of_row):
     return new_right_column_position, new_right_row_position
 
 
-right_function(2,0)
+right_function(0,1)
 
 
 def punjee_pit():
