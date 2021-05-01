@@ -11,6 +11,11 @@ from random_word import RandomWords
 import numpy as np
 
 
+#NOTES
+#1MUST DEFINE HOUSE OR MIRRORS GAME BOARD AND MOVEMENT FUNCTIONS BEFORE THE HOUSE OF MIRRORS RIDE BECAUSE WE NEED TO BE ABLE TO CALL
+#THE FORMER FUNCTIONS INSIDE THE HOUSE OF MIRRORS
+
+
 #helper function for using timer
 def time_ran_out():
     print("You couldnt avoid the axe")
@@ -264,103 +269,6 @@ def park_map():
             print('invalid selection:\n Please pick from the list above.')
             
 
-
-
-
-
-
-
-
-
-
-
-
-
-def house_of_mirrors():
-    
-    playsound(r'audio\House_of_mirrors.mp3')
-    print("You enter the house of mirrors")
-    sys.stdout.flush()
-    time.sleep(3)
-    print("You are presented with a choice")
-    sys.stdout.flush()
-    time.sleep(3)
-    print('Right or Left?')
-    eligible_choices = ['right', 'left', 'Right', 'Left', 'RIGHT', 'LEFT', 'R', 'L', 'r', 'l']
-    while True:
-        #grab user input as a string
-    
-        direction_choice = input('Make your choice: Right or Left')
-        #check that user input matches a valid function in the function library
-        if direction_choice  in eligible_choices:
-            #pass the user input to the function dictionary, call the function based on which key was selected 
-            print(f'Good Luck: You have chosen {direction_choice}')
-            break
-        else:
-            #if input is invalid, stay in the loop and repeat the input function
-            print('invalid selection:\n Please chose left or right.')
-            
-    left_choices = ['left','Left','LEFT','L','l']
-    right_choices = ['right','Right','RIGHT','R', 'r']
-    img = Image.open(r'images\in_the_hall_of_mirrors.PNG')
-    img.show()
-    time.sleep(5)
-    print('You find yourself in a hall of mirrors.')
-    sys.stdout.flush()
-    time.sleep(3)
-    print("You proceed into the unknown.")
-    sys.stdout.flush()
-    time.sleep(3)
-
-    if direction_choice in left_choices:
-        #scenario 1
-        print('The door slams shut')
-        sys.stdout.flush()
-        time.sleep(5)
-        print('The room is dark')
-        sys.stdout.flush()
-        time.sleep(5)
-        playsound(r'audio\Where_are_you.mp3')
-        print('You find yourself trapped in\n The room is dark. \n No one can hear your screams')
-        sys.stdout.flush()
-        time.sleep(5)
-        img = Image.open(r'images\demon.PNG')
-        img.show()
-        print("You must make your selections carefully, or else you will trapped forever.")
-     
-
-        #to do
-        #call create game board function--creates game board and generates a starting position and startign exit
-        #must get starting position , end position
-        
-        #call move_functions to get the index values for rows and columns 
-        #once you have index values, you can then process the users forward , left right or back. 
-
-
-
-        #grab user input. forward left or right or backwards
-        #call forward left or right/back function based on what they say
-        #probably an if statment- 
-        
-
-     
-        sys.stdout.flush()
-    elif direction_choice in right_choices:
-        #scenario 2
-        print('scenario 2')
-    else:
-        print('You managed to get trapped and lost for eternity.\n Have fun screaming for days, and then starving to death.\n Goodbye')
-        #flush after every print because otherwise the terminal does not update real time
-        sys.stdout.flush()
-        sys.exit('User got lost and died.')
-
-
-    park_map()
-
-
-
-
-
 def house_of_mirrors_gameboard():
     #set the number of strikes(mistakes) the user is allowed to 0. So we can count them
     #strikes = 0
@@ -494,7 +402,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-move_function('c0')
+move_function('d0')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -551,7 +459,7 @@ def forward_function(value_of_column,value_of_row):
 
 
 #put in index values from the move_function
-forward_function(2,0)
+#forward_function(2,0)
 
 
 #put in index values from the move_function
@@ -674,7 +582,7 @@ def left_function(value_of_column,value_of_row):
         print('user hit the wall, cant turn right. Make a new selection')
     return new_left_column_position, new_left_row_position
 
-left_function(1,2)   
+left_function(1,0)   
 
 
 def right_function(value_of_column,value_of_row):
@@ -735,7 +643,7 @@ def right_function(value_of_column,value_of_row):
     return new_right_column_position, new_right_row_position
 
 
-right_function(0,1)
+#right_function(0,1)
 
 
 def punjee_pit():
@@ -805,7 +713,7 @@ def breakout_room():
             sys.exit('User hit their head')
 
 #test function    
-breakout_room ()
+#breakout_room ()
 
 #create function that accounts for player movement choice. Prompt the user to pick a direction. Everytime they chose, it calls the function to move the respective direction.     
 def player_movement_choice():
@@ -820,6 +728,129 @@ def player_movement_choice():
         right_function()
     else:
         print('Invalid selection')
+        
+        
+        
+        
+        
+        
+def house_of_mirrors():
+    
+    playsound(r'audio\House_of_mirrors.mp3')
+    print("You enter the house of mirrors")
+    sys.stdout.flush()
+    time.sleep(3)
+    print("You are presented with a choice")
+    sys.stdout.flush()
+    time.sleep(3)
+    print('Right or Left?')
+    eligible_choices = ['right', 'left', 'Right', 'Left', 'RIGHT', 'LEFT', 'R', 'L', 'r', 'l']
+    while True:
+        #grab user input as a string
+    
+        direction_choice = input('Make your choice: Right or Left')
+        #check that user input matches a valid function in the function library
+        if direction_choice  in eligible_choices:
+            #pass the user input to the function dictionary, call the function based on which key was selected 
+            print(f'Good Luck: You have chosen {direction_choice}')
+            break
+        else:
+            #if input is invalid, stay in the loop and repeat the input function
+            print('invalid selection:\n Please chose left or right.')
+            
+    left_choices = ['left','Left','LEFT','L','l']
+    right_choices = ['right','Right','RIGHT','R', 'r']
+    img = Image.open(r'images\in_the_hall_of_mirrors.PNG')
+    img.show()
+    time.sleep(5)
+    print('You find yourself in a hall of mirrors.')
+    sys.stdout.flush()
+    time.sleep(3)
+    print("You proceed into the unknown.")
+    sys.stdout.flush()
+    time.sleep(3)
+
+    if direction_choice in left_choices:
+        #scenario 1
+        print('The door slams shut')
+        sys.stdout.flush()
+        time.sleep(5)
+        print('The room is dark')
+        sys.stdout.flush()
+        time.sleep(5)
+        playsound(r'audio\Where_are_you.mp3')
+        print('You find yourself trapped in\n The room is dark. \n No one can hear your screams')
+        sys.stdout.flush()
+        time.sleep(5)
+        img = Image.open(r'images\demon.PNG')
+        img.show()
+        print("You must make your selections carefully, or else you will trapped forever.")
+        
+        
+        #CALL THE GAMEBOARD FUNCTION
+        house_of_mirrors_gameboard()
+        #house_of_mirrors_gameboard creates a global variable called starting position(str)
+        #take starting position global and pass to move 
+        move_function(starting_position)
+        
+        #while starting_position != exit_position:
+
+        #to do
+        #call create game board function--creates game board and generates a starting position and startign exit
+        #must get starting position , end position
+        
+        #call move_functions to get the index values for rows and columns 
+        #once you have index values, you can then process the users forward , left right or back. 
+
+
+
+        #grab user input. forward left or right or backwards
+        #call forward left or right/back function based on what they say
+        #probably an if statment- 
+
+        sys.stdout.flush()
+    elif direction_choice in right_choices:
+        #scenario 2
+        print('scenario 2')
+    else:
+        print('You managed to get trapped and lost for eternity.\n Have fun screaming for days, and then starving to death.\n Goodbye')
+        #flush after every print because otherwise the terminal does not update real time
+        sys.stdout.flush()
+        sys.exit('User got lost and died.')
+
+
+    park_map()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
 
 
