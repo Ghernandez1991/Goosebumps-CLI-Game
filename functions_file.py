@@ -368,7 +368,7 @@ def house_of_mirrors_gameboard():
     df.to_csv('current_game_board.csv')
 
 #call function for testing
-house_of_mirrors_gameboard()
+#house_of_mirrors_gameboard()
 
 
 #function to pass starting position to- it finds its position (row and column) in the list which makes up the checkerboard
@@ -386,6 +386,7 @@ def move_function(starting_position):
     #if our row value is in the list
     if row in rows:
         #get the index position of our row value from the list
+        global value_of_row
         value_of_row = rows.index(row)
         print(f' The row value {row} is in the {value_of_row} postion in the list rows')
         
@@ -394,6 +395,7 @@ def move_function(starting_position):
     
     if column in columns:
         #get the index position of our column value from the list
+        global value_of_column
         value_of_column = columns.index(column)
         print(f' The row value {column} is in the {value_of_column} postion in the list columns')
     else:
@@ -402,7 +404,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-move_function('d0')
+#move_function('d0')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -522,7 +524,7 @@ def backward_function(value_of_column,value_of_row):
 
 
 #put in index values from the move_function
-backward_function(2,3)
+#backward_function(2,3)
 
 def left_function(value_of_column,value_of_row):
     #wrap all of this in a try except block because if we hit a 'wall' you are going to get an index error
@@ -582,7 +584,7 @@ def left_function(value_of_column,value_of_row):
         print('user hit the wall, cant turn right. Make a new selection')
     return new_left_column_position, new_left_row_position
 
-left_function(1,0)   
+#left_function(1,0)   
 
 
 def right_function(value_of_column,value_of_row):
@@ -718,14 +720,18 @@ def breakout_room():
 #create function that accounts for player movement choice. Prompt the user to pick a direction. Everytime they chose, it calls the function to move the respective direction.     
 def player_movement_choice():
     player_direction  = int(input('Which direction do you want to go 1:Forward 2:Backrward 3:Left 4:Right'))
+    forward_function(value_of_column,value_of_row)
+    backward_function(value_of_column,value_of_row)
+    left_function(value_of_column,value_of_row)
+    right_function(value_of_column,value_of_row)
     if player_direction == 1:
-        forward_function()
+        forward_function(new_forward_column_position,new_forward_row_position)
     elif player_direction == 2:
-        backward_function()
+        backward_function(new_backward_column_position,new_backward_row_position)
     elif player_direction == 3:
-        left_function()
+        left_function(new_left_column_position,new_left_row_position)
     elif player_direction == 4:
-        right_function()
+        right_function(new_right_column_position,new_right_row_position)
     else:
         print('Invalid selection')
         
@@ -793,6 +799,8 @@ def house_of_mirrors():
         #take starting position global and pass to move 
         move_function(starting_position)
         
+        #prompt user to choose which way to move.
+        player_movement_choice()
         #while starting_position != exit_position:
 
         #to do
