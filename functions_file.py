@@ -372,7 +372,7 @@ def house_of_mirrors_gameboard():
     df.to_csv('current_game_board.csv')
 
 #call function for testing
-house_of_mirrors_gameboard()
+#house_of_mirrors_gameboard()
 
 
 #function to pass starting position to- it finds its position (row and column) in the list which makes up the checkerboard
@@ -408,7 +408,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-move_function('b3')
+#move_function('d1')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -435,6 +435,21 @@ def forward_function(value_of_column,value_of_row):
             current_position = new_forward_column_position + str(new_forward_row_position)
             
             
+            #catch if we made it to the exit, or boobie trap
+            if current_position == exit_position:
+                print("you managed to make it out alive")
+                #return user to park map
+                park_map()
+            elif current_position == punjee_pit_starting_position:
+                punjee_pit()
+            #need to code for the starting breakout room position
+            #elif current_position == breakout_room_starting_position:
+            else:
+                print('you continue to wander around in the dark')
+                pass
+            
+            
+            
             print(new_forward_column_position,new_forward_row_position)
             
             
@@ -455,6 +470,21 @@ def forward_function(value_of_column,value_of_row):
             new_forward_column_position = columns[value_of_column]
             #global current_position
             current_position = new_forward_column_position + str(new_forward_row_position)
+            #catch if we made it to the exit, or boobie trap
+            if current_position == exit_position:
+                print("you managed to make it out alive")
+                #return user to park map
+                park_map()
+            elif current_position == punjee_pit_starting_position:
+                punjee_pit()
+            #need to code for the starting breakout room position
+            #elif current_position == breakout_room_starting_position:
+            else:
+                print('you continue to wander around in the dark')
+                pass
+            
+            
+            
             
             print(new_forward_column_position,new_forward_row_position)
             
@@ -472,7 +502,7 @@ def forward_function(value_of_column,value_of_row):
 
 
 #put in index values from the move_function
-forward_function(1,1)
+#forward_function(1,1)
 
 
 #put in index values from the move_function
@@ -501,6 +531,22 @@ def backward_function(value_of_column,value_of_row):
             
             global current_position
             current_position = new_backward_column_position + str(new_backward_row_position)
+            
+            
+            #catch if we made it to the exit, or boobie trap
+            if current_position == exit_position:
+                print("you managed to make it out alive")
+                #return user to park map
+                park_map()
+            elif current_position == punjee_pit_starting_position:
+                punjee_pit()
+            #need to code for the starting breakout room position
+            #elif current_position == breakout_room_starting_position:
+            else:
+                print('you continue to wander around in the dark')
+                pass
+            
+            
         
             print(new_backward_column_position,new_backward_row_position)
         
@@ -523,6 +569,23 @@ def backward_function(value_of_column,value_of_row):
             new_backward_column_position = columns[value_of_column]
             #global current_position
             current_position = new_backward_column_position + str(new_backward_row_position)
+            
+            #catch if we made it to the exit, or boobie trap
+            if current_position == exit_position:
+                print("you managed to make it out alive")
+                #return user to park map
+                park_map()
+            elif current_position == punjee_pit_starting_position:
+                punjee_pit()
+            #need to code for the starting breakout room position
+            #elif current_position == breakout_room_starting_position:
+            else:
+                print('you continue to wander around in the dark')
+                pass
+            
+            
+            
+            
             print(new_backward_column_position,new_backward_row_position)
             
             #print current position in gameboard
@@ -565,6 +628,20 @@ def left_function(value_of_column,value_of_row):
             new_left_row_position = rows[value_of_row]
             global current_position
             current_position = new_left_column_position + str(new_left_row_position)
+            
+            #catch if we made it to the exit, or boobie trap
+            if current_position == exit_position:
+                print("you managed to make it out alive")
+                #return user to park map
+                park_map()
+            elif current_position == punjee_pit_starting_position:
+                punjee_pit()
+            #need to code for the starting breakout room position
+            #elif current_position == breakout_room_starting_position:
+            else:
+                print('you continue to wander around in the dark')
+                pass
+            
         
             print(new_left_column_position,new_left_row_position)
         
@@ -588,6 +665,20 @@ def left_function(value_of_column,value_of_row):
             new_left_row_position = rows[value_of_row]
             #global current_position
             current_position = new_left_column_position + str(new_left_row_position)
+            
+            #catch if we made it to the exit, or boobie trap
+            if current_position == exit_position:
+                print("you managed to make it out alive")
+                #return user to park map
+                park_map()
+            elif current_position == punjee_pit_starting_position:
+                punjee_pit()
+            #need to code for the starting breakout room position
+            #elif current_position == breakout_room_starting_position:
+            else:
+                print('you continue to wander around in the dark')
+                pass
+            
         
             print(new_left_column_position,new_left_row_position)
         
@@ -628,6 +719,20 @@ def right_function(value_of_column,value_of_row):
             new_right_row_position = rows[value_of_row]
             global current_position
             current_position = new_right_column_position + str(new_right_row_position)
+            
+            #catch if we made it to the exit, or boobie trap
+            if current_position == exit_position:
+                print("you managed to make it out alive")
+                #return user to park map
+                park_map()
+            elif current_position == punjee_pit_starting_position:
+                punjee_pit()
+            #need to code for the starting breakout room position
+            #elif current_position == breakout_room_starting_position:
+            else:
+                print('you continue to wander around in the dark')
+                pass
+                
         
             print(new_right_column_position,new_right_row_position)
         
@@ -651,6 +756,21 @@ def right_function(value_of_column,value_of_row):
             new_right_row_position = rows[value_of_row]
             #global current_position
             current_position = new_right_column_position + str(new_right_row_position)
+            
+            #catch if we made it to the exit, or boobie trap
+            if current_position == exit_position:
+                print("you managed to make it out alive")
+                #return user to park map
+                park_map()
+            elif current_position == punjee_pit_starting_position:
+                punjee_pit()
+            #need to code for the starting breakout room position
+            #elif current_position == breakout_room_starting_position:
+            else:
+                print('you continue to wander around in the dark')
+                pass
+            
+            
         
             print(new_right_column_position,new_right_row_position)
         
@@ -678,6 +798,7 @@ def punjee_pit():
     print('You slip and fall')
     playsound(r'audio\Falling.mp3')
     playsound(r'audio\Fatality.mp3')
+    sys.exit('User fell to their death')
 
 #punjee_pit()
 
@@ -780,28 +901,28 @@ def find_current_position_index(current_position):
 
 #create function that accounts for player movement choice. Prompt the user to pick a direction. Everytime they chose, it calls the function to move the respective direction.     
 def player_movement_choice():
-    player_direction  = int(input('Which direction do you want to go 1:Forward 2:Backrward 3:Left 4:Right'))
-    #while current_position != exit_position:
-           
-    if player_direction == 1:
-        find_current_position_index(current_position)
-        forward_function(value_of_column,value_of_row)
+    while current_position != exit_position:
+        player_direction  = int(input('Which direction do you want to go 1:Forward 2:Backrward 3:Left 4:Right'))
+       
+        if player_direction == 1:
+            find_current_position_index(current_position)
+            forward_function(value_of_column,value_of_row)
         
-    elif player_direction == 2:
-        find_current_position_index(current_position)
-        backward_function(value_of_column,value_of_row)
-    elif player_direction == 3:
-        find_current_position_index(current_position)
-        left_function(value_of_column,value_of_row)
-    elif player_direction == 4:
-        find_current_position_index(current_position)
-        right_function(value_of_column,value_of_row)
+        elif player_direction == 2:
+            find_current_position_index(current_position)
+            backward_function(value_of_column,value_of_row)
+        elif player_direction == 3:
+            find_current_position_index(current_position)
+            left_function(value_of_column,value_of_row)
+        elif player_direction == 4:
+            find_current_position_index(current_position)
+            right_function(value_of_column,value_of_row)
         
-    else:
-        print('Invalid selection')
+        else:
+            print('Invalid selection')
         
 #test player movement        
-player_movement_choice()    
+#player_movement_choice()    
         
         
         
@@ -892,7 +1013,7 @@ def house_of_mirrors():
         sys.exit('User got lost and died.')
 
 
-    park_map()
+    #park_map()
         
         
         
