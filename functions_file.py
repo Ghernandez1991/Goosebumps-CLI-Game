@@ -336,6 +336,10 @@ def house_of_mirrors_gameboard():
     print(f"The start row index is {indexed_start_y_point}, the start column index is{indexed_start_x_point}")
     #using the row and column index values, place 'starting_point' onto our game board(csv file)
     df.iat[indexed_start_y_point, indexed_start_x_point] = 'starting_point'
+    
+    #create a global current_position that spits out string of the current column/row
+    global current_position
+    current_position = starting_position
 
 
     #grab the first value of the exit_position(column). The value is originally a string, so we have to convert the second value to int
@@ -368,7 +372,7 @@ def house_of_mirrors_gameboard():
     df.to_csv('current_game_board.csv')
 
 #call function for testing
-#house_of_mirrors_gameboard()
+house_of_mirrors_gameboard()
 
 
 #function to pass starting position to- it finds its position (row and column) in the list which makes up the checkerboard
@@ -404,7 +408,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-#move_function('d0')
+move_function('b3')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -427,9 +431,13 @@ def forward_function(value_of_column,value_of_row):
             new_forward_row_position = rows[value_of_row - 1]
             #calculate new forward column position by taking the index value from value of column 
             new_forward_column_position = columns[value_of_column]
+            global current_position
+            current_position = new_forward_column_position + str(new_forward_row_position)
+            
+            
             print(new_forward_column_position,new_forward_row_position)
             
-            #print current position in gameboard
+            
             #convert column from string(abcd) to the index value in list
             new_forward_column_position = columns.index(new_forward_column_position)
             #take the index value and place 'current position' in the spreadsheet
@@ -445,6 +453,9 @@ def forward_function(value_of_column,value_of_row):
             new_forward_row_position = rows[value_of_row - 1]
             #calculate new forward column position by taking the index value from value of column 
             new_forward_column_position = columns[value_of_column]
+            #global current_position
+            current_position = new_forward_column_position + str(new_forward_row_position)
+            
             print(new_forward_column_position,new_forward_row_position)
             
             #print current position in gameboard
@@ -461,7 +472,7 @@ def forward_function(value_of_column,value_of_row):
 
 
 #put in index values from the move_function
-#forward_function(2,0)
+forward_function(1,1)
 
 
 #put in index values from the move_function
@@ -487,6 +498,9 @@ def backward_function(value_of_column,value_of_row):
             #calculate new forward column position by taking the index value from value of column 
             
             new_backward_column_position = columns[value_of_column]
+            
+            global current_position
+            current_position = new_backward_column_position + str(new_backward_row_position)
         
             print(new_backward_column_position,new_backward_row_position)
         
@@ -507,6 +521,8 @@ def backward_function(value_of_column,value_of_row):
             new_backward_row_position = rows[value_of_row + 1]
             #calculate new forward column position by taking the index value from value of column 
             new_backward_column_position = columns[value_of_column]
+            #global current_position
+            current_position = new_backward_column_position + str(new_backward_row_position)
             print(new_backward_column_position,new_backward_row_position)
             
             #print current position in gameboard
@@ -547,6 +563,8 @@ def left_function(value_of_column,value_of_row):
             #calculate new forward column position by taking the index value from value of column 
             
             new_left_row_position = rows[value_of_row]
+            global current_position
+            current_position = new_left_column_position + str(new_left_row_position)
         
             print(new_left_column_position,new_left_row_position)
         
@@ -568,6 +586,8 @@ def left_function(value_of_column,value_of_row):
             new_left_column_position = columns[value_of_column - 1]
             #calculate new forward column position by taking the index value from value of column 
             new_left_row_position = rows[value_of_row]
+            #global current_position
+            current_position = new_left_column_position + str(new_left_row_position)
         
             print(new_left_column_position,new_left_row_position)
         
@@ -606,6 +626,8 @@ def right_function(value_of_column,value_of_row):
             new_right_column_position = columns[value_of_column + 1]
             #calculate new forward column position by taking the index value from value of column 
             new_right_row_position = rows[value_of_row]
+            global current_position
+            current_position = new_right_column_position + str(new_right_row_position)
         
             print(new_right_column_position,new_right_row_position)
         
@@ -627,6 +649,8 @@ def right_function(value_of_column,value_of_row):
             new_right_column_position = columns[value_of_column + 1]
             #calculate new forward column position by taking the index value from value of column 
             new_right_row_position = rows[value_of_row]
+            #global current_position
+            current_position = new_right_column_position + str(new_right_row_position)
         
             print(new_right_column_position,new_right_row_position)
         
@@ -717,26 +741,67 @@ def breakout_room():
 #test function    
 #breakout_room ()
 
+
+def find_current_position_index(current_position):
+    #get list of rows in the house of mirrors 
+    rows = [0,1,2,3]
+    #get list of column names from house of mirrors 
+    columns = ['a', 'b', 'c', 'd']
+    #grab the row name from starting_position passed to the function(convert to int since list has ints)
+    row = int(current_position[1])
+    #grab the column name as the first leter from starting_position passed to the function 
+    column = current_position[0]
+    #check to make sure they are right
+    print(column,row)
+    #if our row value is in the list
+    if row in rows:
+        #get the index position of our row value from the list
+        global value_of_row
+        value_of_row = rows.index(row)
+        print(f' The row value {row} is in the {value_of_row} postion in the list rows')
+        
+    else:
+        print('item not in list')
+    
+    if column in columns:
+        #get the index position of our column value from the list
+        global value_of_column
+        value_of_column = columns.index(column)
+        print(f' The row value {column} is in the {value_of_column} postion in the list columns')
+    else:
+        print('item not in list')
+        
+
+    return value_of_column, value_of_row
+    
+    
+    
+    
+
 #create function that accounts for player movement choice. Prompt the user to pick a direction. Everytime they chose, it calls the function to move the respective direction.     
 def player_movement_choice():
     player_direction  = int(input('Which direction do you want to go 1:Forward 2:Backrward 3:Left 4:Right'))
-    forward_function(value_of_column,value_of_row)
-    backward_function(value_of_column,value_of_row)
-    left_function(value_of_column,value_of_row)
-    right_function(value_of_column,value_of_row)
+    #while current_position != exit_position:
+           
     if player_direction == 1:
-        forward_function(new_forward_column_position,new_forward_row_position)
+        find_current_position_index(current_position)
+        forward_function(value_of_column,value_of_row)
+        
     elif player_direction == 2:
-        backward_function(new_backward_column_position,new_backward_row_position)
+        find_current_position_index(current_position)
+        backward_function(value_of_column,value_of_row)
     elif player_direction == 3:
-        left_function(new_left_column_position,new_left_row_position)
+        find_current_position_index(current_position)
+        left_function(value_of_column,value_of_row)
     elif player_direction == 4:
-        right_function(new_right_column_position,new_right_row_position)
+        find_current_position_index(current_position)
+        right_function(value_of_column,value_of_row)
+        
     else:
         print('Invalid selection')
         
-        
-        
+#test player movement        
+player_movement_choice()    
         
         
         
@@ -831,35 +896,7 @@ def house_of_mirrors():
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
+         
 
 
 function_dictionary = {'7': time_ran_out, '8': intro, '9': park_entrance,
