@@ -242,7 +242,7 @@ def leave_park():
 
 #create a main menu where the user can choose which ride(function) they want to play
 def park_map():
-    playsound(r'audio\Goosebumps (Theme Song).mp3', False)
+    playsound(r'audio\Goosebumps (Theme Song).mp3', block = False)
     print('Unclear of where to go next, you lookaround for a map.')
     sys.stdout.flush()
     #time the terminal 
@@ -309,12 +309,30 @@ def house_of_mirrors_gameboard():
         global punjee_pit_starting_position
         punjee_pit_starting_position = punjee_pit_starting_position_xaxis + str(punjee_pit_starting_position_yaxis)
         
+        #create breakout_room
+        breakout_room_starting_position_yaxis= random.randrange(0,4)
+        breakout_room_starting_position_xaxis= random.choice(columns)
+        
+        global breakout_room_starting_position
+        breakout_room_starting_position = breakout_room_starting_position_xaxis + str(breakout_room_starting_position_yaxis)
+        
+        
+        
+        
+        
         if starting_position==exit_position:
             pass
         elif starting_position == punjee_pit_starting_position:
             pass
+        elif starting_position == breakout_room_starting_position:
+            pass
+        elif exit_position == breakout_room_starting_position:
+            pass
         elif exit_position==punjee_pit_starting_position:
             pass
+        elif punjee_pit_starting_position == breakout_room_starting_position:
+            pass
+        
         else:
             break
 
@@ -324,7 +342,7 @@ def house_of_mirrors_gameboard():
     print(f"Your starting position is {starting_position}")
     print(f"your exit position is {exit_position}")
     print(f"your punjee pit position is {punjee_pit_starting_position}")
-
+    print(f"your breakout_room position is {breakout_room_starting_position}")
     #grab the first value of the starting_position(column). The value is originally a string, so we have to conver the second value to int
     converted_start_x_point = starting_position[0]
     #grab the second value of the starting_position(row). The value is originally a string, so we have to conver the second value to int
@@ -366,6 +384,32 @@ def house_of_mirrors_gameboard():
     print(f"The start row index for punjee is {indexed_punjee_start_y_point}, the start column index for punjee is{indexed__punjee_start_x_point}")
     #using the row and column index values, place 'exit_point' onto our game board(csv file)
     df.iat[indexed_punjee_start_y_point, indexed__punjee_start_x_point] = 'punjee_pit'
+    
+    
+    
+    #put breakout room on the dataframe
+    #grab the first value of the punjee_pit(column). The value is originally a string, so we have to convert the second value to int
+    converted_breakout_x_point = breakout_room_starting_position[0]
+    #grab the second value of the punjee_pit(row). The value is originally a string, so we have to convert the second value to int
+    converted_breakout_y_point = int(breakout_room_starting_position[1])
+    #use index function to find which index poisition the starting row/column is in the lists of rows and columns
+    indexed_breakout_start_x_point = columns.index(converted_breakout_x_point)
+    #use index function to find which index poisition the starting row/column is in the lists of rows and columns
+    indexed_breakout_start_y_point = rows.index(converted_breakout_y_point)
+    print(f"The start row index for punjee is {indexed_breakout_start_y_point}, the start column index for punjee is{indexed_breakout_start_x_point}")
+    #using the row and column index values, place 'exit_point' onto our game board(csv file)
+    df.iat[indexed_breakout_start_y_point, indexed_breakout_start_x_point] = 'breakout_room'
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     #print DF so we can see all the items on the board
     print(df)
     #write the df to a csv for use later
@@ -408,7 +452,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-#move_function('d1')
+#move_function('b1')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -442,6 +486,9 @@ def forward_function(value_of_column,value_of_row):
                 park_map()
             elif current_position == punjee_pit_starting_position:
                 punjee_pit()
+            elif current_position == breakout_room_starting_position:
+                breakout_room()   
+                
             #need to code for the starting breakout room position
             #elif current_position == breakout_room_starting_position:
             else:
@@ -477,6 +524,8 @@ def forward_function(value_of_column,value_of_row):
                 park_map()
             elif current_position == punjee_pit_starting_position:
                 punjee_pit()
+            elif current_position == breakout_room_starting_position:
+                breakout_room()
             #need to code for the starting breakout room position
             #elif current_position == breakout_room_starting_position:
             else:
@@ -540,6 +589,8 @@ def backward_function(value_of_column,value_of_row):
                 park_map()
             elif current_position == punjee_pit_starting_position:
                 punjee_pit()
+            elif current_position == breakout_room_starting_position:
+                breakout_room()    
             #need to code for the starting breakout room position
             #elif current_position == breakout_room_starting_position:
             else:
@@ -577,6 +628,8 @@ def backward_function(value_of_column,value_of_row):
                 park_map()
             elif current_position == punjee_pit_starting_position:
                 punjee_pit()
+            elif current_position == breakout_room_starting_position:
+                breakout_room()
             #need to code for the starting breakout room position
             #elif current_position == breakout_room_starting_position:
             else:
@@ -636,6 +689,8 @@ def left_function(value_of_column,value_of_row):
                 park_map()
             elif current_position == punjee_pit_starting_position:
                 punjee_pit()
+            elif current_position == breakout_room_starting_position:
+                breakout_room()
             #need to code for the starting breakout room position
             #elif current_position == breakout_room_starting_position:
             else:
@@ -673,6 +728,8 @@ def left_function(value_of_column,value_of_row):
                 park_map()
             elif current_position == punjee_pit_starting_position:
                 punjee_pit()
+            elif current_position == breakout_room_starting_position:
+                breakout_room()
             #need to code for the starting breakout room position
             #elif current_position == breakout_room_starting_position:
             else:
@@ -727,6 +784,8 @@ def right_function(value_of_column,value_of_row):
                 park_map()
             elif current_position == punjee_pit_starting_position:
                 punjee_pit()
+            elif current_position == breakout_room_starting_position:
+                breakout_room()
             #need to code for the starting breakout room position
             #elif current_position == breakout_room_starting_position:
             else:
@@ -764,6 +823,8 @@ def right_function(value_of_column,value_of_row):
                 park_map()
             elif current_position == punjee_pit_starting_position:
                 punjee_pit()
+            elif current_position == breakout_room_starting_position:
+                breakout_room()
             #need to code for the starting breakout room position
             #elif current_position == breakout_room_starting_position:
             else:
@@ -850,7 +911,8 @@ def breakout_room():
                 time_ran_out()
                 
         elif  correct_guesses == len(list_of_words):
-            print('You successfully printed all the words')
+            t.cancel()
+            print('You successfully printed all the words. Please make another selection to escape the house of mirrors')
             player_movement_choice()
         
         else:
