@@ -18,4 +18,4 @@ This choose your own adventure game is based in the command line. Users are dump
 
 
 
-![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fgoosebumps.fandom.com%2Fwiki%2FOne_Day_at_HorrorLand&psig=AOvVaw1dIaHSUjNMmhbGWs917RPK&ust=1620237493958000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJiqq5TNsPACFQAAAAAdAAAAABAG)
+![alt text](https://static.wikia.nocookie.net/goosebumps/images/e/e1/Onedayathorrorland_-_reprint.jpg/revision/latest?cb=20160713150916)
