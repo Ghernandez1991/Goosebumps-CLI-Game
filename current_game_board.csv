@@ -1,5 +1,5 @@
 ,a,b,c,d
 0,,,,
-1,,breakout_room,,
-2,,,starting_point,
-3,,exit_point,,punjee_pit
+1,,exit_point,,starting_point
+2,,,,punjee_pit
+3,,breakout_room,,

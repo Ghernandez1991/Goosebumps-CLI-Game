@@ -416,7 +416,7 @@ def house_of_mirrors_gameboard():
     df.to_csv('current_game_board.csv')
 
 #call function for testing
-#house_of_mirrors_gameboard()
+house_of_mirrors_gameboard()
 
 
 #function to pass starting position to- it finds its position (row and column) in the list which makes up the checkerboard
@@ -452,7 +452,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-#move_function('b1')
+move_function('d1')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -482,6 +482,7 @@ def forward_function(value_of_column,value_of_row):
             #catch if we made it to the exit, or boobie trap
             if current_position == exit_position:
                 print("you managed to make it out alive")
+                playsound(r'audio\Did_you_enjoy_hom.mp3')
                 #return user to park map
                 park_map()
             elif current_position == punjee_pit_starting_position:
@@ -520,6 +521,7 @@ def forward_function(value_of_column,value_of_row):
             #catch if we made it to the exit, or boobie trap
             if current_position == exit_position:
                 print("you managed to make it out alive")
+                playsound(r'audio\Did_you_enjoy_hom.mp3')
                 #return user to park map
                 park_map()
             elif current_position == punjee_pit_starting_position:
@@ -585,6 +587,7 @@ def backward_function(value_of_column,value_of_row):
             #catch if we made it to the exit, or boobie trap
             if current_position == exit_position:
                 print("you managed to make it out alive")
+                playsound(r'audio\Did_you_enjoy_hom.mp3')
                 #return user to park map
                 park_map()
             elif current_position == punjee_pit_starting_position:
@@ -624,6 +627,7 @@ def backward_function(value_of_column,value_of_row):
             #catch if we made it to the exit, or boobie trap
             if current_position == exit_position:
                 print("you managed to make it out alive")
+                playsound(r'audio\Did_you_enjoy_hom.mp3')
                 #return user to park map
                 park_map()
             elif current_position == punjee_pit_starting_position:
@@ -685,6 +689,7 @@ def left_function(value_of_column,value_of_row):
             #catch if we made it to the exit, or boobie trap
             if current_position == exit_position:
                 print("you managed to make it out alive")
+                playsound(r'audio\Did_you_enjoy_hom.mp3')
                 #return user to park map
                 park_map()
             elif current_position == punjee_pit_starting_position:
@@ -724,6 +729,7 @@ def left_function(value_of_column,value_of_row):
             #catch if we made it to the exit, or boobie trap
             if current_position == exit_position:
                 print("you managed to make it out alive")
+                playsound(r'audio\Did_you_enjoy_hom.mp3')
                 #return user to park map
                 park_map()
             elif current_position == punjee_pit_starting_position:
@@ -780,6 +786,7 @@ def right_function(value_of_column,value_of_row):
             #catch if we made it to the exit, or boobie trap
             if current_position == exit_position:
                 print("you managed to make it out alive")
+                playsound(r'audio\Did_you_enjoy_hom.mp3')
                 #return user to park map
                 park_map()
             elif current_position == punjee_pit_starting_position:
@@ -819,6 +826,8 @@ def right_function(value_of_column,value_of_row):
             #catch if we made it to the exit, or boobie trap
             if current_position == exit_position:
                 print("you managed to make it out alive")
+                playsound(r'audio\Did_you_enjoy_hom.mp3')
+                
                 #return user to park map
                 park_map()
             elif current_position == punjee_pit_starting_position:
@@ -855,10 +864,18 @@ def right_function(value_of_column,value_of_row):
 
 def punjee_pit():
     print('The room is pitch black')
+    sys.stdout.flush()
     print('You cant hear a thing')
+    sys.stdout.flush()
     print('You slip and fall')
+    sys.stdout.flush()
+    
     playsound(r'audio\Falling.mp3')
+    time.sleep(5)
     playsound(r'audio\Fatality.mp3')
+    img = Image.open(r'images\punji.jpg')
+    img.show()
+    
     sys.exit('User fell to their death')
 
 #punjee_pit()
@@ -893,15 +910,14 @@ def breakout_room():
         user_input = input('Quick!\n Type the word above\n Press Enter')
         #if the user managed to press a button
         if user_input==item :
-        
             print ('You managed to type the word correctly')
-            
-            #flush after every print because otherwise the terminal does not update real time
-            #sys.stdout.flush()
-            #cancel the timer function and get out
-            #t.cancel()
-            #if the user failed to input anything    
+             
             correct_guesses += 1
+            if correct_guesses == len(list_of_words):
+                t.cancel()
+                print('You successfully printed all the words. Please make another selection to escape the house of mirrors')
+                player_movement_choice()
+                
         elif user_input != item :
             print('You screwed up')
             #call time_ran_out_function which kills the player and the game
@@ -909,12 +925,7 @@ def breakout_room():
             #time_ran_out()
             if screw_ups == strikes:
                 time_ran_out()
-                
-        elif  correct_guesses == len(list_of_words):
-            t.cancel()
-            print('You successfully printed all the words. Please make another selection to escape the house of mirrors')
-            player_movement_choice()
-        
+
         else:
             print('You managed to crack your skull on a passing branch.\n Have fun falling unconcious and not waking up.\n Goodbye')
             #flush after every print because otherwise the terminal does not update real time
@@ -984,7 +995,7 @@ def player_movement_choice():
             print('Invalid selection')
         
 #test player movement        
-#player_movement_choice()    
+player_movement_choice()    
         
         
         
