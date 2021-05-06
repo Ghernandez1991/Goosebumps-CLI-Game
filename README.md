@@ -10,7 +10,10 @@ Users who do a git pull will need to pip install the requirments.txt file in the
 YAML can be found here. 
 https://pypi.org/project/PyYAML/
 
-This choose your own adventure game is based in the command line. Users are dumped into a themepark with attactions they can choose from. Each attaction features its own challenges and traps where the user my die. 
+This choose your own adventure game is based in the command line. Users are dumped into a themepark with attactions they can choose from. Each attaction features its own challenges and traps where the user may die. 
+
+
+Viewer beware, you're in for a scare. 
 
 
 
