@@ -229,7 +229,57 @@ def guillotine_ride():
 
 #create functions for remaining parts of the story
 def petting_zoo():
-    print('petting zoo')
+    print('You approach what appears to be a zoo in the distance')
+    time.sleep(2)
+    print('The sign reads')
+    time.sleep(2)
+    print('Petting Zoo: Come for the pets and stay for a while')
+    time.sleep(2)
+    print('you are presented with a choice. Turn right for the domestic animals, turn left for wild animals.')
+    
+
+
+    eligible_choices = ['right', 'left', 'Right', 'Left', 'RIGHT', 'LEFT', 'R', 'L', 'r', 'l']
+    while True:
+        #grab user input as a string
+    
+        player_direction_choice  = input('which do you choose? Press enter when complete')
+        #check that user input matches a valid function in the function library
+        if player_direction_choice  in eligible_choices:
+            #pass the user input to the function dictionary, call the function based on which key was selected 
+            print(f'Good Luck: You have chosen {player_direction_choice}')
+
+            break
+        else:
+            #if input is invalid, stay in the loop and repeat the input function
+            print('invalid selection:\n Please choose left or right.')
+
+
+
+    left_choices = ['left','Left', 'L','l','LEFT']
+    
+    right_choices = ['right', 'Right', 'RIGHT', 'R',  'r']
+    
+    if player_direction_choice in left_choices:
+        print(f"You have chosen to take your chances with the wild animals and go {player_direction_choice}")
+        playsound(r'audio\elephant_edit.mp3', False)
+        
+        
+    
+    
+    else:
+        print(f"You have elected to take your chances with the domesticated animals and go {player_direction_choice}")
+    
+
+
+
+
+
+
+
+
+
+
 
 
 #create functions for remaining parts of the story
@@ -416,7 +466,7 @@ def house_of_mirrors_gameboard():
     df.to_csv('current_game_board.csv')
 
 #call function for testing
-house_of_mirrors_gameboard()
+#house_of_mirrors_gameboard()
 
 
 #function to pass starting position to- it finds its position (row and column) in the list which makes up the checkerboard
@@ -452,7 +502,7 @@ def move_function(starting_position):
 
     return value_of_column, value_of_row
 #uncomment to test
-move_function('d1')
+#move_function('d1')
 
 #put in index values from the move_function as arguement
 def forward_function(value_of_column,value_of_row):
@@ -995,7 +1045,7 @@ def player_movement_choice():
             print('Invalid selection')
         
 #test player movement        
-player_movement_choice()    
+#player_movement_choice()    
         
         
         
@@ -1078,7 +1128,31 @@ def house_of_mirrors():
         sys.stdout.flush()
     elif direction_choice in right_choices:
         #scenario 2
-        print('scenario 2')
+        print('You hear a voice over a loud speaker')
+        print('You decided to turn right and have thus avoided the prospect of being trapped forever')
+        print('However, I cant simply let you pass')
+        print('Pick a number between 0 and 100')
+        number = random.randrange(0,100)
+        user_choice = int(input('Enter your number'))
+        absolute_value = number - user_choice
+        if user_choice == number:
+            print('You correctly guessed the number')
+            print('A trap door spits you out to the main park entrance')
+            park_map()
+        #elif absolute_value <= 20 and >= -20:
+            #print('Your guess was within 20 points')
+            #second_user_choice = int(input('Pick a second number'))
+            #still building
+            #second_absolute_value = number - second_user_choice
+            #if second_absolute_value <=10 and >= -20:
+                #print(f'{second_absolute_value}')
+        else:
+            print('Your guess was too far away\n Goodbye')
+            punjee_pit()
+                
+        
+        
+        
     else:
         print('You managed to get trapped and lost for eternity.\n Have fun screaming for days, and then starving to death.\n Goodbye')
         #flush after every print because otherwise the terminal does not update real time
