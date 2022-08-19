@@ -17,7 +17,7 @@ import numpy as np
 
 
 #helper function for using timer
-def time_ran_out():
+def time_ran_out() -> None:
     print("You couldnt avoid the axe")
     time.sleep(5)
     #flush after every print because otherwise the terminal does not update real time
@@ -29,7 +29,7 @@ def time_ran_out():
     os._exit(0)
     
 #into function when the game starts
-def intro():
+def intro()-> None:
     #play intro music
     playsound(r'audio\Goosebumps_theme.mp3', False)
     #time the terminal to the music
@@ -97,7 +97,7 @@ def intro():
 
 
 #entrance function , does the user want to play 
-def park_entrance():
+def park_entrance()-> None:
     print("You enter the abandonded carnival and are met by a ticket stand.")
     #flush after every print because otherwise the terminal does not update real time
     sys.stdout.flush()
@@ -151,7 +151,7 @@ def park_entrance():
 
 
 #first ride. 
-def guillotine_ride():
+def guillotine_ride()-> None:
     print('After gathering your tickets, you see a large sign.')
     #flush after every print because otherwise the terminal does not update real time
     sys.stdout.flush()
@@ -268,7 +268,7 @@ def guillotine_ride():
 
 
 #create functions for remaining parts of the story
-def petting_zoo():
+def petting_zoo() -> None:
     print('You approach what appears to be a zoo in the distance')
     time.sleep(2)
     print('The sign reads')
@@ -323,7 +323,7 @@ def petting_zoo():
 
 
 #create functions for remaining parts of the story
-def shooting_gallery():
+def shooting_gallery() -> None:
     print('shooting gallery')
 
 
@@ -331,7 +331,7 @@ def leave_park():
     sys.exit('Thanks for visiting Horrorland. It was to die for')
 
 #create a main menu where the user can choose which ride(function) they want to play
-def park_map():
+def park_map() -> None:
     playsound(r'audio\Goosebumps (Theme Song).mp3', block = False)
     print('Unclear of where to go next, you lookaround for a map.')
     sys.stdout.flush()
@@ -359,7 +359,7 @@ def park_map():
             print('invalid selection:\n Please pick from the list above.')
             
 
-def house_of_mirrors_gameboard():
+def house_of_mirrors_gameboard() -> None:
     #set the number of strikes(mistakes) the user is allowed to 0. So we can count them
     #strikes = 0
     #user gets a random number of chances between 3 and 5
@@ -952,7 +952,7 @@ def right_function(value_of_column,value_of_row):
 #right_function(0,1)
 
 
-def punjee_pit():
+def punjee_pit() -> None:
     print('The room is pitch black')
     sys.stdout.flush()
     print('You cant hear a thing')
@@ -970,7 +970,7 @@ def punjee_pit():
 
 #punjee_pit()
 
-def breakout_room():
+def breakout_room() -> None:
     r= RandomWords()
     
     #user gets a random number of chances between 3 and 5
@@ -1063,7 +1063,7 @@ def find_current_position_index(current_position):
     
 
 #create function that accounts for player movement choice. Prompt the user to pick a direction. Everytime they chose, it calls the function to move the respective direction.     
-def player_movement_choice():
+def player_movement_choice() -> None:
     while current_position != exit_position:
         player_direction  = int(input('Which direction do you want to go 1:Forward 2:Backrward 3:Left 4:Right'))
        
@@ -1089,7 +1089,7 @@ def player_movement_choice():
         
         
         
-def house_of_mirrors():
+def house_of_mirrors() -> None:
     
     playsound(r'audio\House_of_mirrors.mp3')
     print("You enter the house of mirrors")
